@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mamba Clutch - Apresentação Comercial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #090014;
+            --mamba-purple: #3b0066;
+            --neon-pink: #d946ef;
+            --neon-purple: #a855f7;
+            --mamba-yellow: #facc15;
+            --mamba-yellow-hover: #eab308;
+            --text-main: #ffffff;
+            --text-muted: #cbd5e1;
+            --card-bg: rgba(20, 5, 40, 0.6);
+            --card-border: rgba(168, 85, 247, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+            padding: 60px 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+        }
+
+        /* CONTAINER DO SLIDE */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: var(--bg-dark);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(168, 85, 247, 0.1);
+        }
+
+        /* BACKGROUND NEON EFFECTS (IGUAL AO SITE) */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 10%;
+            width: 40%;
+            height: 140%;
+            background: radial-gradient(ellipse, rgba(217, 70, 239, 0.15) 0%, transparent 60%);
+            transform: rotate(20deg);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: 0%;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(168, 85, 247, 0.2) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .neon-beam-1, .neon-beam-2 {
+            position: absolute;
+            width: 80px;
+            height: 150%;
+            background: linear-gradient(90deg, transparent, rgba(217, 70, 239, 0.5), transparent);
+            filter: blur(25px);
+            z-index: 0;
+        }
+        .neon-beam-1 { top: -20%; left: 30%; transform: rotate(15deg); }
+        .neon-beam-2 { top: -20%; right: 20%; transform: rotate(-15deg); }
+
+        .slide-container > * { position: relative; z-index: 1; }
+
+        /* HEADER / LOGO MOCK */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            width: fit-content;
+        }
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        .logo-text span { color: var(--mamba-yellow); margin-left: 2px; font-size: 32px; }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+        h1 { 
+            font-size: 64px; 
+            font-weight: 800; 
+            line-height: 1.1; 
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+        h1 span { color: var(--mamba-yellow); }
+        
+        .slide-title { 
+            font-size: 42px; 
+            font-weight: 800; 
+            margin-bottom: 40px; 
+            color: var(--text-main);
+        }
+        .slide-title span { color: var(--mamba-yellow); }
+
+        p { font-size: 20px; line-height: 1.5; color: var(--text-muted); }
+
+        /* DARK GLASSMORPHISM CARDS */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-pink);
+        }
+
+        /* GRID LAYOUTS */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; width: 100%; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; align-items: center; }
+
+        /* ANIMAÇÕES DE MOVIMENTO CONTÍNUO (FLUTUAÇÃO) */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes float-alt {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating-main { animation: float 6s ease-in-out infinite; }
+        .floating-layer-1 { animation: float-alt 5s ease-in-out infinite 1s; }
+        .floating-layer-2 { animation: float-alt 7s ease-in-out infinite 2s; }
+
+        /* BUTTON (IGUAL AO SITE) */
+        .btn-mamba {
+            background-color: var(--mamba-yellow);
+            color: #1e1b4b; /* dark text for contrast */
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            display: inline-block;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(250, 204, 21, 0.2);
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-mamba:hover {
+            background-color: var(--mamba-yellow-hover);
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(250, 204, 21, 0.4);
+        }
+
+        /* TAGS (ex: Maior assessoria...) */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+        .badge i { color: var(--mamba-yellow); }
+
+        /* FERRAMENTAS LOGOS (Fundo branco para destacar no dark) */
+        .tool-box {
+            background: #ffffff;
+            border-radius: 15px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            padding: 20px;
+        }
+        .tool-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        /* PRICING THE COURT / THE OFFENSE */
+        .section-tag {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .tag-court { background: var(--mamba-yellow); color: #000; }
+        .tag-offense { background: var(--neon-purple); color: #fff; }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .price-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .price-item h4 { font-size: 16px; margin-bottom: 8px; color: #fff; }
+        .price-item .valor { font-size: 24px; font-weight: 800; color: var(--mamba-yellow); margin-bottom: 8px; }
+        .price-item p { font-size: 13px; color: #94a3b8; line-height: 1.4; }
+        .price-item .kpi { font-size: 12px; font-weight: 600; color: var(--neon-pink); margin-top: 10px; display: block; }
+        .icon-circle {
+            width: 40px; height: 40px; border-radius: 8px; background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center; color: var(--text-main); margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        /* ICONS LIST APRIMORADA PARA 7 ITENS */
+        .check-list { 
+            list-style: none; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; /* Reduzido de 20px para caber os 7 itens */
+        }
+        .check-list li { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 12px; 
+            font-size: 15px; /* Reduzido para encaixar bem na tela */
+            font-weight: 500; 
+            line-height: 1.4;
+        }
+        .check-list i { 
+            color: var(--mamba-yellow); 
+            font-size: 20px; 
+            margin-top: 2px; 
+            width: 25px; 
+            text-align: center; 
+            flex-shrink: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: CAPA (HERO SECTION STYLE) -->
+    <div class="slide-container">
+        <div class="neon-beam-1"></div>
+        <div class="neon-beam-2"></div>
+        
+        <div class="top-nav">
+            <div class="logo-text">mamb<span><i class="fa-solid fa-staff-snake" style="font-size: 24px;"></i></span></div>
+            <div style="font-weight: 600; font-size: 14px; margin-left: 15px; padding-left: 15px; border-left: 1px solid rgba(255,255,255,0.2); letter-spacing: 2px;">CLUTCH</div>
+        </div>
+        <div class="display: flex; justify-content: space-between; align-items: flex-start; padding-top: 15px; flex-grow: 1; position: relative; z-index: 10;">
+            <div style="max-width: 750px; position: relative; z-index: 2;">
+                <div class="badge" style="margin-bottom: 15px;"><i class="fa-solid fa-crown"></i> A Elite do E-commerce na América Latina</div>
+                <h1 style="font-size: 50px; margin-bottom: 15px; line-height: 1.2;">Enquanto você depende do marketplace, seus concorrentes estão construindo <span>ativos próprios.</span></h1>
+                <p style="font-size: 22px; color: #fff; font-weight: 600; margin-bottom: 10px;">Venda direto. Lucre mais. Tenha controle total.</p>
+                <p style="font-size: 18px; margin-bottom: 20px;">Com a Mamba Clutch, você transforma sua operação do Mercado Livre em um e-commerce próprio, rápido, escalável e feito para maximizar margem.</p>
+                
+                <a href="#" class="btn-mamba" style="margin-top: 10px;">QUERO ESCALAR AGORA</a>
+            </div>
+            
+            <div style="position: absolute; right: -50px; top: 40%; transform: translateY(-50%); width: 700px; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none;">
+                <img src="https://i.postimg.cc/fbqLtxSS/Copia-de-Contagem-Regressiva-Mamba-Academy.png" alt="Mamba Hero" class="floating-main" style="width: 100%; object-fit: contain; filter: drop-shadow(0 0 60px rgba(168, 85, 247, 0.4));">
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: O PRODUTO -->
+    <div class="slide-container">
+        <div class="neon-beam-1" style="left: -10%;"></div>
+        
+        <div class="grid-2" style="align-items: center; flex-grow: 1;">
+            <!-- Adicionado transform: translateY(-25px) para subir o texto e cravar no meio exato da tela -->
+            <div style="display: flex; flex-direction: column; justify-content: center; transform: translateY(-25px);">
+                <h2 class="slide-title" style="margin-bottom: 15px;">Solução <span>Ponta a Ponta</span></h2>
+                <p style="font-size: 18px; color: #fff; font-weight: 600; margin-bottom: 25px; line-height: 1.4;">
+                    Construção de e-commerce com foco em performance, escalabilidade e controle total da stack.
+                </p>
+                
+                <!-- Lista de 7 itens adaptada para caber com elegância -->
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-code"></i> <div><strong>Base técnica:</strong> Arquitetura modular, código otimizado e carregamento de alta velocidade.</div></li>
+                    <li><i class="fa-solid fa-server"></i> <div><strong>Infraestrutura:</strong> Preparado para integrações, alto tráfego e crescimento sem gargalos.</div></li>
+                    <li><i class="fa-solid fa-layer-group"></i> <div><strong>Camada de experiência:</strong> UX/UI estruturado para fluxo de compra eficiente e redução de drop-off.</div></li>
+                    <li><i class="fa-solid fa-lock"></i> <div><strong>Independência estrutural:</strong> Sem lock-in de plataforma. Total controle sobre código e evolução do produto.</div></li>
+                    <li><i class="fa-solid fa-magnifying-glass-chart"></i> <div><strong>SEO técnico:</strong> Estrutura otimizada para indexação, alta performance e crescimento orgânico consistente.</div></li>
+                    <li><i class="fa-solid fa-shield-halved"></i> <div><strong>Segurança:</strong> Arquitetura protegida, com foco em integridade de dados, estabilidade e confiabilidade da operação.</div></li>
+                    <li><i class="fa-solid fa-arrows-rotate"></i> <div><strong>Otimização contínua:</strong> Sistema pronto para evoluir vendas e permitir inclusão de novos produtos de forma simples no site.</div></li>
+                </ul>
+            </div>
+            
+            <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%;">
+                <div class="glass-card floating-main" style="display: flex; align-items: center; justify-content: center; padding: 0; overflow: hidden; border: 2px solid rgba(250, 204, 21, 0.3); width: 100%; position: relative; z-index: 1;">
+                    <!-- Imagem do site real como preview do que a empresa faz -->
+                    <img src="https://i.postimg.cc/bwTfdpSH/Captura-de-tela-2026-04-28-162517.png" alt="Preview AG Resinas" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;">
+                </div>
+                
+                <!-- Imagem sobreposta na diagonal inferior esquerda -->
+                <img src="https://i.postimg.cc/fLZsBCSQ/Captura-de-tela-2026-04-28-165248.png" alt="Detalhe Preview Esq" class="floating-layer-1" style="position: absolute; bottom: -110px; left: -20px; width: 55%; border-radius: 16px; box-shadow: 20px 30px 50px rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.15); z-index: 2;">
+                
+                <!-- Nova imagem sobreposta na diagonal superior direita -->
+                <img src="https://i.postimg.cc/PqDZmXY7/image-(30).png" alt="Detalhe Preview Dir" class="floating-layer-2" style="position: absolute; top: -140px; right: 0px; width: 60%; border-radius: 16px; box-shadow: -20px 30px 50px rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.15); z-index: 2;">
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: TECNOLOGIA GLOABL -->
+    <div class="slide-container">
+        <h2 class="slide-title" style="text-align: center;">Stack Tecnológico <span>Nível Global</span></h2>
+        <p style="text-align: center; margin-bottom: 50px;">A mesma infraestrutura utilizada pelas maiores empresas do mundo, <strong style="color: #ffffff;">agora na sua operação.</strong></p>
+        
+        <div class="grid-3">
+            <div class="glass-card floating-layer-1" style="text-align: center;">
+                <div style="height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <!-- Logótipo Clerk em SVG puro: Sem fundo, resolução infinita -->
+                    <svg viewBox="0 0 140 45" height="50" style="display: block; margin: 0 auto; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
+                        <path d="M 28 6 C 16 6 6 16 6 28 C 6 35 9.5 41 15 45 L 20 40 C 16 37 13.5 33 13.5 28 C 13.5 20 20 13.5 28 13.5 C 29.5 13.5 31 13.8 32.5 14.3 L 35 8 C 32.8 6.7 30.5 6 28 6 Z" fill="#9e7aff"/>
+                        <circle cx="28" cy="22" r="6" fill="#6c47ff"/>
+                        <path d="M 18 39 C 18 33 22.5 29 28 29 C 33.5 29 38 33 38 39 C 35.5 43 32 45 28 45 C 24 45 20.5 43 18 39 Z" fill="#6c47ff"/>
+                        <text x="46" y="36" font-family="'Inter', sans-serif" font-weight="800" font-size="34" fill="#ffffff" letter-spacing="-1.5">clerk</text>
+                    </svg>
+                </div>
+                <h3 style="margin-bottom: 10px; font-size: 20px;">Clerk: Ferramenta de login</h3>
+                <p style="font-size: 14px; line-height: 1.5;">Sistema de autenticação pronto com login por e-mail e Google/Apple, gestão automática de usuários e integração fácil com frameworks modernos, sem necessidade de desenvolver infraestrutura de login.</p>
+            </div>
+            
+            <div class="glass-card floating-main" style="text-align: center;">
+                <div style="height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <!-- Logo Ecwid restaurado e aumentado para combinar com os outros -->
+                    <img src="https://i.postimg.cc/kMN5WVZM/ecwid.jpg" alt="Ecwid e Stripe" style="height: 95px; object-fit: contain; filter: invert(1) contrast(1.2) brightness(1.5); mix-blend-mode: screen;">
+                </div>
+                <h3 style="margin-bottom: 10px; font-size: 22px;">Gestão & Segurança</h3>
+                <p style="font-size: 14px; line-height: 1.5;"><strong>Ecwid:</strong> Banco de dados, plataforma para cadastros de produtos e categorias, cuida do checkout dos pedidos feitos no site e da segurança com o mesmo sistema usado na Apple e Amazon (Stripe).</p>
+            </div>
+            
+            <div class="glass-card floating-layer-2" style="text-align: center;">
+                <div style="height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <!-- Vercel SVG puro -->
+                    <svg viewBox="0 0 180 50" height="40" style="display: block; margin: 0 auto; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
+                        <path d="M 30 10 L 50 40 L 10 40 Z" fill="#ffffff"/>
+                        <text x="60" y="39" font-family="'Inter', sans-serif" font-weight="800" font-size="36" fill="#ffffff" letter-spacing="-1.5">Vercel</text>
+                    </svg>
+                </div>
+                <h3 style="margin-bottom: 10px; font-size: 20px;">Hospedagem & Performance</h3>
+                <p style="font-size: 14px; line-height: 1.5;"><strong>Vercel Edge:</strong> Infraestrutura global de entrega de conteúdo (CDN). Garante que a sua loja carregue em milissegundos em qualquer lugar do mundo, sem quedas em picos de acesso.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: PROCESSO E CONTROLE -->
+    <div class="slide-container">
+        <div class="neon-beam-2" style="right: 10%;"></div>
+        <h2 class="slide-title" style="margin-bottom: 25px;">Transparência e <span>Controle Total</span></h2>
+        
+        <div style="display: flex; gap: 50px; align-items: center; flex-grow: 1;">
+            <div class="glass-card" style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; padding: 35px;">
+                <div style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="font-size: 40px; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--mamba-yellow); line-height: 1;">01</div>
+                    <div>
+                        <h4 style="font-size: 18px; margin-bottom: 5px;">Código real (sem construtores)</h4>
+                        <p style="font-size: 14px; line-height: 1.4;">Desenvolvimento em código puro e estruturado, garantindo alta performance, SEO otimizado e controle total do sistema.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="font-size: 40px; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--mamba-yellow); line-height: 1;">02</div>
+                    <div>
+                        <h4 style="font-size: 18px; margin-bottom: 5px;">Entrega do ativo</h4>
+                        <p style="font-size: 14px; line-height: 1.4;">Código-fonte completo entregue via repositório e build final. O e-commerce é um ativo digital 100% seu.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="font-size: 40px; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--mamba-yellow); line-height: 1;">03</div>
+                    <div>
+                        <h4 style="font-size: 18px; margin-bottom: 5px;">Escalabilidade de tráfego</h4>
+                        <p style="font-size: 14px; line-height: 1.4;">Arquitetura preparada para suportar alto volume de acessos e picos de campanha como Black Friday.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="font-size: 40px; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--mamba-yellow); line-height: 1;">04</div>
+                    <div>
+                        <h4 style="font-size: 18px; margin-bottom: 5px;">Estrutura auditável</h4>
+                        <p style="font-size: 14px; line-height: 1.4;">Código organizado e documentado, facilitando manutenção, evolução e integrações futuras.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 20px; align-items: flex-start; grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; margin-top: 5px;">
+                    <div style="font-size: 40px; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--mamba-yellow); line-height: 1;">05</div>
+                    <div>
+                        <h4 style="font-size: 18px; margin-bottom: 5px;">Performance otimizada</h4>
+                        <p style="font-size: 14px; line-height: 1.4;">Sistema otimizado para carregamento rápido, estabilidade e fluidez em qualquer dispositivo.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="width: 320px; text-align: center; flex-shrink: 0; display: flex; flex-direction: column; align-items: center;">
+                <!-- Logótipo Mamba Hero (Cobra roxa) com efeito de flutuação -->
+                <img src="https://i.postimg.cc/nz39YCR5/Copia-de-Contagem-Regressiva-Mamba-Academy.png" alt="Mamba Clutch Logo" class="floating-main" style="width: 100%; margin-bottom: 30px; filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.5));">
+                <a href="#" class="btn-mamba" style="font-size: 16px; padding: 15px 0; width: 100%; margin-top: 0; display: block;">FALAR COM UM ESPECIALISTA</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: PRICING E VALORES -->
+    <div class="slide-container" style="padding-top: 40px;">
+        <h2 class="slide-title" style="margin-bottom: 30px;">O Arsenal de <span>Crescimento</span></h2>
+
+        <!-- THE COURT -->
+        <div class="section-tag tag-court">
+            <i class="fa-solid fa-cart-shopping"></i> THE COURT (Setup Único)
+        </div>
+        
+        <div class="price-grid">
+            <div class="price-item">
+                <div class="icon-circle"><i class="fa-solid fa-desktop"></i></div>
+                <h4>Config. Plataforma</h4>
+                <div class="valor">R$ 3.500</div>
+                <p>Loja pronta, gateways, integrações ERP.</p>
+            </div>
+            <div class="price-item">
+                <div class="icon-circle"><i class="fa-solid fa-bullseye"></i></div>
+                <h4>Branding MVP</h4>
+                <div class="valor">R$ 6.500</div>
+                <p>Brandbook, tom de voz, tipografia.</p>
+            </div>
+            <div class="price-item">
+                <div class="icon-circle"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h4>Redesign UX/UI</h4>
+                <div class="valor">R$ 4.000</div>
+                <p>Wireframes, rotas de checkout fáceis.</p>
+            </div>
+            <div class="price-item">
+                <div class="icon-circle"><i class="fa-solid fa-list-check"></i></div>
+                <h4>Otimização Catálogo</h4>
+                <div class="valor">R$ 2.000</div>
+                <p>50 produtos com SEO, categorias.</p>
+            </div>
+        </div>
+
+        <!-- THE OFFENSE -->
+        <div class="section-tag tag-offense">
+            <i class="fa-solid fa-chart-line"></i> THE OFFENSE (Gestão Mensal)
+        </div>
+        
+        <div class="price-grid" style="margin-bottom: 0;">
+            <div class="price-item">
+                <div class="icon-circle"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                <h4>Gestão de Tráfego</h4>
+                <div class="valor">R$ 3.500<span style="font-size: 14px; color: #fff;">/mês</span></div>
+                <p>Meta + Google Ads (Full-funnel).</p>
+                <span class="kpi">KPI: ROAS e CAC</span>
+            </div>
+            <div class="price-item">
+                <div class="icon-circle"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <h4>SEO Contínuo</h4>
+                <div class="valor">R$ 2.000<span style="font-size: 14px; color: #fff;">/mês</span></div>
+                <p>Conteúdo, backlink, on-page.</p>
+                <span class="kpi">KPI: Tráfego Orgânico</span>
+            </div>
+            <div class="price-item">
+                <div class="icon-circle"><i class="fa-solid fa-bolt"></i></div>
+                <h4>Canais Avançados</h4>
+                <div class="valor">R$ 1.500<span style="font-size: 14px; color: #fff;">/mês</span></div>
+                <p>Redes Sociais, YouTube, testes A/B.</p>
+                <span class="kpi">KPI: Novos usuários</span>
+            </div>
+            <div class="price-item">
+                <div class="icon-circle"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <h4>CRM e Retenção</h4>
+                <div class="valor">R$ 1.500<span style="font-size: 14px; color: #fff;">/mês</span></div>
+                <p>E-mail, automações, carrinho.</p>
+                <span class="kpi">KPI: LTV e recompra</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
